@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tommaso Rossini</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F6F2;--fg:#161614;--fg2:#5E5D59;--accent:#B8955A;--al:#D4B07A;--border:#E0DED8;--white:#fff;--sw:268px;--red:#C0392B;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--fg);font-family:"DM Sans",sans-serif;font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;}
+body.lang-en .it{display:none!important;}
+body.lang-it .en{display:none!important;}
+/* edit mode */
+body.emode [data-k]{border-bottom:1.5px dashed var(--accent);cursor:text;outline:none;}
+body.emode [data-k]:focus{background:rgba(184,149,90,.07);}
+/* sidebar */
+.sb{width:var(--sw);background:#111110;color:#D8D7D3;padding:52px 36px 44px;position:fixed;inset:0 auto 0 0;display:flex;flex-direction:column;z-index:20;overflow-y:auto;}
+.sb-name{font-family:"Playfair Display",serif;font-size:1.55rem;line-height:1.2;color:#fff;letter-spacing:-.01em;margin-bottom:10px;}
+.sb-role{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--al);line-height:1.5;}
+.sb-div{height:1px;background:#2A2A28;margin:28px 0;}
+.nl{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#4A4A48;margin-bottom:10px;}
+.ng{margin-bottom:22px;}
+.nl2{display:flex;align-items:center;font-size:.83rem;color:#7A7976;padding:5px 0;cursor:pointer;transition:color .18s;border:none;background:none;font-family:"DM Sans",sans-serif;font-weight:300;width:100%;text-align:left;}
+.nl2:hover{color:#D8D7D3;}
+.nl2.on{color:#fff;}
+.nl2.on::before{content:"";display:inline-block;width:16px;height:1px;background:var(--accent);margin-right:10px;flex-shrink:0;transform:translateY(-1px);}
+.sb-bot{margin-top:auto;padding-top:28px;}
+.lr{display:flex;gap:6px;margin-bottom:24px;}
+.lb{background:none;border:1px solid #2E2E2C;color:#5A5A58;font-family:"DM Sans",sans-serif;font-size:.7rem;letter-spacing:.1em;padding:5px 12px;cursor:pointer;transition:all .18s;border-radius:2px;}
+.lb.on{border-color:var(--accent);color:var(--al);}
+.cl{display:flex;flex-direction:column;gap:11px;}
+.ci{display:flex;align-items:center;gap:10px;font-size:.76rem;color:#5A5A58;text-decoration:none;transition:color .18s;word-break:break-all;}
+.ci:hover{color:#A8A7A3;}
+.ci svg{width:14px;height:14px;flex-shrink:0;opacity:.5;}
+/* main */
+.main{margin-left:var(--sw);flex:1;max-width:860px;padding:72px 80px 100px;}
+.page{display:none;}
+.page.on{display:block;}
+/* section */
+.sec{margin-bottom:68px;}
+.sec.hide{display:none;}
+.slabel{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:26px;display:flex;align-items:center;gap:14px;}
+.slabel::after{content:"";flex:1;height:1px;background:var(--border);}
+/* hero */
+.hero{padding-bottom:60px;border-bottom:1px solid var(--border);margin-bottom:68px;}
+.eyebrow{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;}
+.hname{font-family:"Playfair Display",serif;font-size:clamp(2.8rem,5vw,4.2rem);font-weight:500;line-height:1.05;letter-spacing:-.025em;margin-bottom:20px;}
+.hsub{font-size:.95rem;color:var(--fg2);margin-bottom:26px;}
+.hbio{font-size:.9rem;color:var(--fg2);max-width:540px;line-height:1.8;}
+/* timeline */
+.tl{display:flex;flex-direction:column;}
+.ti{display:grid;grid-template-columns:148px 1fr;gap:0 28px;padding:26px 0;border-bottom:1px solid var(--border);}
+.ti:first-child{border-top:1px solid var(--border);}
+.td{font-size:.75rem;color:var(--accent);letter-spacing:.04em;padding-top:4px;}
+.tt{font-family:"Playfair Display",serif;font-size:1rem;font-weight:500;color:var(--fg);line-height:1.3;}
+.to{font-size:.72rem;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-top:4px;}
+.tde{font-size:.85rem;color:var(--fg2);line-height:1.75;margin-top:10px;}
+/* grid */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.card{background:var(--white);border:1px solid var(--border);padding:22px 26px;}
+.ct{font-size:.88rem;font-weight:500;margin-bottom:5px;}
+.cs{font-size:.76rem;color:var(--fg2);line-height:1.5;}
+.ca{font-size:.72rem;color:var(--accent);margin-bottom:4px;letter-spacing:.04em;}
+/* tags */
+.tags{display:flex;flex-wrap:wrap;gap:8px;}
+.tag{font-size:.76rem;padding:5px 13px;border:1px solid var(--border);color:var(--fg2);background:var(--white);}
+/* portfolio */
+.ph{padding-bottom:48px;border-bottom:1px solid var(--border);margin-bottom:52px;}
+/* project card */
+.pc{background:var(--white);border:1px solid var(--border);padding:38px 42px;margin-bottom:18px;transition:border-color .2s;position:relative;}
+.pc:hover{border-color:var(--accent);}
+.ptag{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+.pn{font-family:"Playfair Display",serif;font-size:1.3rem;font-weight:500;margin-bottom:12px;line-height:1.25;}
+.pd{font-size:.86rem;color:var(--fg2);line-height:1.8;max-width:520px;margin-bottom:20px;}
+.pl{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--fg);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px;transition:color .18s;}
+.pl:hover{color:var(--accent);}
+/* pub card */
+.pub{background:var(--white);border:1px solid var(--border);padding:28px 36px;margin-bottom:14px;display:flex;gap:28px;align-items:flex-start;transition:border-color .2s;position:relative;}
+.pub:hover{border-color:var(--accent);}
+.pi{width:40px;height:40px;flex-shrink:0;background:#F0EDE8;display:flex;align-items:center;justify-content:center;margin-top:2px;}
+.pi svg{width:18px;height:18px;opacity:.5;}
+.pb{flex:1;}
+.pty{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+.ptitle{font-family:"Playfair Display",serif;font-size:1.05rem;font-weight:500;color:var(--fg);line-height:1.25;margin-bottom:6px;}
+.pdes{font-size:.82rem;color:var(--fg2);line-height:1.7;margin-bottom:14px;}
+.pact{display:flex;gap:14px;flex-wrap:wrap;}
+.pbtn{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fg);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px;transition:color .18s;}
+.pbtn:hover{color:var(--accent);}
+.pbtn.pri{color:var(--accent);}
+/* admin del btn */
+.adel{display:none;position:absolute;top:12px;right:12px;background:none;border:1px solid var(--border);color:var(--fg2);font-size:.68rem;letter-spacing:.06em;padding:4px 10px;cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .18s;}
+.adel:hover{border-color:var(--red);color:var(--red);}
+body.aon .adel{display:block;}
+/* admin overlay */
+.aov{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.5);align-items:flex-end;justify-content:center;}
+.aov.open{display:flex;}
+.abox{background:#fff;width:100%;max-width:740px;max-height:85vh;overflow-y:auto;padding:44px 52px;border-radius:4px 4px 0 0;position:relative;}
+.abox h2{font-family:"Playfair Display",serif;font-size:1.5rem;font-weight:500;margin-bottom:6px;}
+.asub{font-size:.82rem;color:var(--fg2);margin-bottom:32px;}
+.acl{position:absolute;top:20px;right:24px;background:none;border:none;cursor:pointer;font-size:1.5rem;color:var(--fg2);}
+.asec{margin-bottom:36px;}
+.asec h3{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.ar{display:flex;gap:10px;margin-bottom:10px;align-items:center;}
+.ar label{font-size:.8rem;color:var(--fg2);width:110px;flex-shrink:0;}
+.ai,.as{flex:1;padding:8px 12px;border:1px solid var(--border);font-family:"DM Sans",sans-serif;font-size:.82rem;color:var(--fg);background:var(--bg);outline:none;}
+.ai:focus{border-color:var(--accent);}
+.abtn{padding:9px 20px;background:#111110;color:#fff;border:none;font-family:"DM Sans",sans-serif;font-size:.78rem;letter-spacing:.06em;cursor:pointer;transition:opacity .18s;white-space:nowrap;}
+.abtn:hover{opacity:.8;}
+.abtn.out{background:none;border:1px solid var(--border);color:var(--fg2);}
+.abtn.out:hover{border-color:var(--accent);color:var(--accent);opacity:1;}
+.abtn.dl{background:var(--accent);color:#fff;}
+.stog{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);}
+.stog span{font-size:.84rem;}
+.tsw{width:36px;height:20px;background:#CCC;border-radius:10px;cursor:pointer;position:relative;transition:background .2s;border:none;flex-shrink:0;}
+.tsw.on{background:var(--accent);}
+.tsw::after{content:"";position:absolute;width:14px;height:14px;background:#fff;border-radius:50%;top:3px;left:3px;transition:left .2s;}
+.tsw.on::after{left:19px;}
+/* password */
+.pov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:300;align-items:center;justify-content:center;}
+.pov.open{display:flex;}
+.pbox{background:#fff;padding:44px 52px;width:380px;border-radius:4px;}
+.pbox h3{font-family:"Playfair Display",serif;font-size:1.3rem;margin-bottom:6px;}
+.pbox p{font-size:.82rem;color:var(--fg2);margin-bottom:22px;}
+.pinp{width:100%;padding:10px 14px;border:1px solid var(--border);font-family:"DM Sans",sans-serif;font-size:.9rem;margin-bottom:14px;outline:none;}
+.pinp:focus{border-color:var(--accent);}
+.perr{font-size:.78rem;color:var(--red);margin-bottom:10px;display:none;}
+/* fabs */
+.fab{position:fixed;bottom:28px;width:42px;height:42px;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.15);transition:background .2s;}
+.fab svg{width:16px;height:16px;}
+.gfab{right:28px;background:#111110;}
+.gfab:hover{background:#2A2A28;}
+.gfab.on{background:var(--accent);}
+.pfab{right:80px;background:#111110;display:none;}
+.pfab:hover{background:#2A2A28;}
+body.aon .pfab{display:flex;}
+/* edit toast */
+.etoas{position:fixed;bottom:28px;right:132px;background:#111110;color:#D8D7D3;padding:10px 18px;font-size:.78rem;letter-spacing:.04em;display:none;align-items:center;gap:12px;border-radius:4px;z-index:100;}
+.etoas.on{display:flex;}
+.tbtn{background:var(--accent);border:none;color:#fff;font-family:"DM Sans",sans-serif;font-size:.72rem;padding:5px 13px;cursor:pointer;border-radius:2px;}
+.tbtn.s{background:#333330;}
+/* pdf viewer modal */
+.pdfm{display:none;position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.85);flex-direction:column;}
+.pdfm.open{display:flex;}
+.pdfh{display:flex;justify-content:space-between;align-items:center;padding:16px 24px;background:#111110;flex-shrink:0;}
+.pdfh span{color:#D8D7D3;font-size:.9rem;letter-spacing:.04em;}
+.pdfh button{background:none;border:1px solid #333;color:#D8D7D3;padding:6px 16px;cursor:pointer;font-family:"DM Sans",sans-serif;font-size:.78rem;letter-spacing:.06em;transition:border-color .18s;}
+.pdfh button:hover{border-color:var(--accent);color:var(--al);}
+.pdfh .pcl{border:none;color:#888;font-size:1.4rem;padding:0 8px;cursor:pointer;background:none;}
+iframe.pdff{flex:1;border:none;width:100%;background:#fff;}
+@media(max-width:900px){:root{--sw:220px;}.main{padding:56px 48px 80px;}}
+@media(max-width:700px){.sb{position:relative;width:100%;inset:auto;padding:28px 24px;flex-wrap:wrap;flex-direction:row;gap:16px;}.sb-bot{margin-top:0;padding-top:0;}.main{margin-left:0;padding:36px 24px 80px;}.ti{grid-template-columns:1fr;gap:4px;}.g2{grid-template-columns:1fr;}.pub{flex-direction:column;gap:16px;}.abox{padding:28px 24px;}}
+</style>
+</head>
+<body class="lang-en">
+
+<aside class="sb">
+  <div>
+    <div class="sb-name">Tommaso<br>Rossini</div>
+    <div class="sb-role">Quant Developer &amp;<br>Financial Analyst</div>
+  </div>
+  <div class="sb-div"></div>
+  <nav>
+    <div class="ng">
+      <div class="nl"><span class="en">Pages</span><span class="it">Pagine</span></div>
+      <button class="nl2 on" id="nav-cv" onclick="showPage('cv')"><span class="en">About &amp; CV</span><span class="it">Chi sono &amp; CV</span></button>
+      <button class="nl2" id="nav-pf" onclick="showPage('pf')">Portfolio</button>
+    </div>
+    <div class="ng">
+      <div class="nl"><span class="en">Sections</span><span class="it">Sezioni</span></div>
+      <button class="nl2" onclick="goTo('cv','s-exp')"><span class="en">Experience</span><span class="it">Esperienza</span></button>
+      <button class="nl2" onclick="goTo('cv','s-edu')"><span class="en">Education</span><span class="it">Istruzione</span></button>
+      <button class="nl2" onclick="goTo('cv','s-cert')"><span class="en">Certifications</span><span class="it">Certificazioni</span></button>
+      <button class="nl2" onclick="goTo('cv','s-sk')">Skills</button>
+      <button class="nl2" onclick="goTo('pf','s-proj')"><span class="en">Projects</span><span class="it">Progetti</span></button>
+      <button class="nl2" onclick="goTo('pf','s-pub')"><span class="en">Publications</span><span class="it">Pubblicazioni</span></button>
+    </div>
+  </nav>
+  <div class="sb-bot">
+    <div class="lr">
+      <button class="lb on" id="ben" onclick="setLang('en')">EN</button>
+      <button class="lb" id="bit" onclick="setLang('it')">IT</button>
+    </div>
+    <div class="cl">
+      <a href="mailto:trossini.02@icloud.com" class="ci">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+        trossini.02@icloud.com
+      </a>
+      <a href="https://it.tradingview.com/u/OmegaTools/#published-scripts" target="_blank" class="ci">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        TradingView / OmegaTools
+      </a>
+      <a href="https://www.linkedin.com/in/tommaso-rossini-89a913233/" target="_blank" class="ci">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+</aside>
+
+<main class="main">
+
+<!-- CV PAGE -->
+<div class="page on" id="page-cv">
+  <div class="hero">
+    <div class="eyebrow">Milano · 2002</div>
+    <h1 class="hname">Tommaso<br>Rossini</h1>
+    <div class="hsub">
+      <span class="en" data-k="sub-en">Quantitative Developer &middot; Technical Financial Analyst &middot; Entrepreneur</span>
+      <span class="it" data-k="sub-it">Sviluppatore Quantitativo &middot; Analista Tecnico Finanziario &middot; Imprenditore</span>
+    </div>
+    <p class="hbio">
+      <span class="en" data-k="bio-en">Based in Milan. I design and build proprietary trading software, quantitative indicators, and analytical tools &mdash; from retail TradingView scripts to institutional-grade systems. Founder of OmegaTools. Currently pursuing an MSc in Economics and Applied Finance at Universit&agrave; di Milano-Bicocca.</span>
+      <span class="it" data-k="bio-it">Basato a Milano. Progetto e costruisco software di trading proprietario, indicatori quantitativi e strumenti analitici &mdash; da script TradingView per retail a sistemi istituzionali. Fondatore di OmegaTools. Attualmente iscritto alla Magistrale in Economia e Finanza Applicata presso l&rsquo;Universit&agrave; di Milano-Bicocca.</span>
+    </p>
+  </div>
+
+  <section class="sec" id="s-exp" data-sid="exp">
+    <div class="slabel"><span class="en">Experience</span><span class="it">Esperienza</span></div>
+    <div class="tl" id="tl-exp">
+      <div class="ti" data-cid="e1">
+        <div class="td">2022 &mdash; Present</div>
+        <div>
+          <div class="tt"><span class="en">Founder &amp; Lead Developer</span><span class="it">Fondatore &amp; Lead Developer</span></div>
+          <div class="to">OmegaTools</div>
+          <div class="tde"><span class="en" data-k="e1en">Founded and operate OmegaTools, a software house specialising in financial market analysis tools. Three activity tracks: publishing open-access TradingView indicators for the trading community, developing premium indicators for retail traders, and building bespoke quantitative systems on commission for institutional clients and corporations.</span><span class="it" data-k="e1it">Ho fondato e gestisco OmegaTools, una software house specializzata in strumenti per l&rsquo;analisi dei mercati finanziari. Tre fronti: indicatori TradingView open-access per la community, indicatori premium per retail trader, e sistemi quantitativi su commissione per clienti istituzionali e aziende.</span></div>
+        </div>
+      </div>
+      <div class="ti" data-cid="e2">
+        <div class="td">2023 &mdash; Present</div>
+        <div>
+          <div class="tt"><span class="en">Technical Analyst &amp; Software Developer</span><span class="it">Analista Tecnico &amp; Sviluppatore Software</span></div>
+          <div class="to">Miura Financial Research</div>
+          <div class="tde"><span class="en" data-k="e2en">Technical financial analysis, design and development of proprietary software for time series analysis, and authoring of technical research reports.</span><span class="it" data-k="e2it">Analisi tecnica finanziaria, sviluppo di software proprietario per l&rsquo;analisi di serie storiche, redazione di report tecnici di ricerca.</span></div>
+        </div>
+      </div>
+      <div class="ti" data-cid="e3">
+        <div class="td">2021 &mdash; Present</div>
+        <div>
+          <div class="tt"><span class="en">Independent Analyst &amp; Investor</span><span class="it">Analista Indipendente &amp; Investitore</span></div>
+          <div class="to">Self-employed</div>
+          <div class="tde"><span class="en">Active in futures markets, specialised in quantitative analysis of NQ (Nasdaq 100 Futures).</span><span class="it">Operante nel mercato dei futures, specializzato in analisi quantitativa sull&rsquo;asset NQ (Nasdaq 100 Futures).</span></div>
+        </div>
+      </div>
+      <div class="ti" data-cid="e4">
+        <div class="td">2022</div>
+        <div>
+          <div class="tt"><span class="en">Financial Writer &amp; Freelance Developer</span><span class="it">Redattore Finanziario &amp; Sviluppatore Freelance</span></div>
+          <div class="to">Investire.biz &middot; varie testate</div>
+          <div class="tde"><span class="en">Financial articles for online publications and freelance software development for finance-sector clients.</span><span class="it">Articoli finanziari per testate online e sviluppo software freelance per clienti nel settore finanziario.</span></div>
+        </div>
+      </div>
+      <div class="ti" data-cid="e5">
+        <div class="td">2019</div>
+        <div>
+          <div class="tt"><span class="en">Customer Service &mdash; Internship</span><span class="it">Customer Service &mdash; Stage</span></div>
+          <div class="to">Comune di Forte dei Marmi</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="s-edu" data-sid="edu">
+    <div class="slabel"><span class="en">Education</span><span class="it">Istruzione</span></div>
+    <div class="tl">
+      <div class="ti">
+        <div class="td">2024 &mdash; Present</div>
+        <div>
+          <div class="tt"><span class="en">MSc &mdash; Economics &amp; Applied Finance</span><span class="it">Magistrale &mdash; Economia e Finanza Applicata</span></div>
+          <div class="to">Universit&agrave; di Milano-Bicocca</div>
+        </div>
+      </div>
+      <div class="ti">
+        <div class="td">2021 &mdash; 2023</div>
+        <div>
+          <div class="tt"><span class="en">BSc &mdash; Organizational Sciences</span><span class="it">Laurea Triennale &mdash; Scienze dell&rsquo;Organizzazione</span></div>
+          <div class="to">Universit&agrave; di Milano-Bicocca</div>
+        </div>
+      </div>
+      <div class="ti">
+        <div class="td">2016 &mdash; 2020</div>
+        <div>
+          <div class="tt"><span class="en">Diploma &mdash; Administration, Finance &amp; Marketing</span><span class="it">Diploma &mdash; Amministrazione, Finanza e Marketing</span></div>
+          <div class="to">ITE E. Tosi, Busto Arsizio</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="s-cert" data-sid="cert">
+    <div class="slabel"><span class="en">Certifications</span><span class="it">Certificazioni</span></div>
+    <div class="g2">
+      <div class="card"><div class="ca">CMT Association</div><div class="ct">Certified Market Technician &mdash; Level I</div></div>
+      <div class="card"><div class="ca">SIAT</div><div class="ct"><span class="en">Certified Technical Financial Analyst</span><span class="it">Analista Tecnico Finanziario Certificato</span></div><div class="cs"><span class="en">Affiliate Member 2022&mdash;</span><span class="it">Socio Ordinario Affiliate 2022&mdash;</span></div></div>
+      <div class="card"><div class="ca">Cambridge Assessment International</div><div class="ct">International Business Studies</div><div class="cs"><span class="en">Cambridge Certification</span><span class="it">Certificazione Cambridge</span></div></div>
+      <div class="card"><div class="ca">Cambridge Assessment International</div><div class="ct">First Certificate B2 (FCE)</div><div class="cs"><span class="en">English Language Certification</span><span class="it">Certificazione di Lingua Inglese</span></div></div>
+    </div>
+  </section>
+
+  <section class="sec" data-sid="langs">
+    <div class="slabel"><span class="en">Languages</span><span class="it">Lingue</span></div>
+    <div class="g2">
+      <div class="card"><div class="ct">Italiano</div><div class="ca"><span class="en">Native</span><span class="it">Madrelingua</span></div></div>
+      <div class="card"><div class="ct">English</div><div class="ca">B2 &mdash; C1</div></div>
+      <div class="card"><div class="ct">Deutsch</div><div class="ca"><span class="en">Elementary</span><span class="it">Base</span></div></div>
+      <div class="card"><div class="ct">&#26085;&#26412;&#35486;</div><div class="ca"><span class="en">Elementary</span><span class="it">Base</span></div></div>
+    </div>
+  </section>
+
+  <section class="sec" id="s-sk" data-sid="sk">
+    <div class="slabel">Skills</div>
+    <div class="tags" id="sk-cont">
+      <span class="tag">Python</span>
+      <span class="tag">Pine Script</span>
+      <span class="tag">EasyLanguage / PowerLanguage</span>
+      <span class="tag">AI Prompt Engineering</span>
+      <span class="tag">Machine Learning for Finance</span>
+      <span class="tag">Algorithmic Trading</span>
+      <span class="tag">Futures Trading</span>
+      <span class="tag">Portfolio Management</span>
+      <span class="tag">Investing</span>
+      <span class="tag">Technical &amp; Quantitative Analysis</span>
+      <span class="tag">Fundamental Analysis</span>
+    </div>
+  </section>
+</div><!-- /cv -->
+
+<!-- PORTFOLIO PAGE -->
+<div class="page" id="page-pf">
+  <div class="ph">
+    <div class="eyebrow"><span class="en">Selected Work</span><span class="it">Lavori Selezionati</span></div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:500;letter-spacing:-.02em;line-height:1.1;margin-top:14px;margin-bottom:16px;"><span class="en">Projects &amp; Publications</span><span class="it">Progetti &amp; Pubblicazioni</span></h2>
+    <p style="font-size:.88rem;color:var(--fg2);max-width:480px;line-height:1.8;"><span class="en" data-k="pintro-en">Built at the intersection of quantitative finance and software engineering &mdash; from community tools to institutional systems and published research.</span><span class="it" data-k="pintro-it">Costruiti all&rsquo;intersezione tra finanza quantitativa e ingegneria del software &mdash; dagli strumenti per la community ai sistemi istituzionali e alla ricerca pubblicata.</span></p>
+  </div>
+
+  <section class="sec" id="s-proj" data-sid="proj">
+    <div class="slabel"><span class="en">Active Projects</span><span class="it">Progetti Attivi</span></div>
+    <div id="proj-cont">
+
+      <div class="pc" data-cid="p1">
+        <button class="adel" onclick="delCard('p1','proj-cont')">&#10005; Remove</button>
+        <div class="ptag">Quantitative Software &middot; SaaS &middot; Community</div>
+        <div class="pn">OmegaTools</div>
+        <div class="pd"><span class="en" data-k="p1en">A proprietary software house specialising in financial market analysis tools for TradingView. Open-access scripts are freely published for the trading community; advanced tools are available as premium subscriptions or built on commission for institutional clients.</span><span class="it" data-k="p1it">Software house proprietaria specializzata in strumenti di analisi dei mercati finanziari per TradingView. Script open-access gratuiti per la community; strumenti avanzati disponibili come abbonamenti premium o sviluppati su commissione per clienti istituzionali.</span></div>
+        <a href="https://it.tradingview.com/u/OmegaTools/#published-scripts" target="_blank" class="pl"><span class="en">View on TradingView &rarr;</span><span class="it">Vedi su TradingView &rarr;</span></a>
+      </div>
+
+      <div class="pc" data-cid="p2">
+        <button class="adel" onclick="delCard('p2','proj-cont')">&#10005; Remove</button>
+        <div class="ptag">FinTech &middot; Hospitality Investment</div>
+        <div class="pn">Anticipi</div>
+        <div class="pd"><span class="en" data-k="p2en">A hospitality-investment platform connecting independent Italian boutique hotels with retail investors through structured pre-booking financial instruments. The model follows a demand-first, supply-second approach, with entrepreneurial networks as dual acquisition channels for both hotel supply and investor demand.</span><span class="it" data-k="p2it">Piattaforma di investimento hospitality che collega hotel boutique indipendenti italiani con investitori retail tramite strumenti finanziari di pre-prenotazione strutturati. Il modello segue un approccio demand-first, supply-second, con reti imprenditoriali come canali di acquisizione sia lato offerta che lato domanda.</span></div>
+      </div>
+
+      <div class="pc" data-cid="p3">
+        <button class="adel" onclick="delCard('p3','proj-cont')">&#10005; Remove</button>
+        <div class="ptag">AI &middot; Multi-Agent System &middot; Web Application</div>
+        <div class="pn">AI Startup Board</div>
+        <div class="pd"><span class="en" data-k="p3en">A web application in which the user acts as CEO directing a configurable team of specialised AI agents on business projects. Each agent operates within a distinct domain &mdash; strategy, marketing, finance, technology &mdash; and collaborates asynchronously under the user&rsquo;s direction.</span><span class="it" data-k="p3it">Applicazione web in cui l&rsquo;utente agisce come CEO dirigendo un team configurabile di agenti AI specializzati su progetti aziendali. Ogni agente opera in un dominio distinto &mdash; strategia, marketing, finanza, tecnologia &mdash; e collabora in modo asincrono.</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="sec" id="s-pub" data-sid="pub">
+    <div class="slabel"><span class="en">Publications</span><span class="it">Pubblicazioni</span></div>
+    <div id="pub-cont">
+
+      <div class="pub" data-pid="b1">
+        <button class="adel" onclick="delCard('b1','pub-cont')">&#10005; Remove</button>
+        <div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <div class="pb">
+          <div class="pty"><span class="en">Research Paper &middot; PDF</span><span class="it">Paper di Ricerca &middot; PDF</span></div>
+          <div class="ptitle">Strategic Trading in Financial Markets</div>
+          <div class="pdes"><span class="en">Theoretical Methodologies, Data-Driven Validation, and Software Solutions. A comprehensive paper on trading strategy development covering trend identification, regime analysis, signal execution, discretionary vs algorithmic trading, and the four pillars framework (Trend, Location, Signal, Filter). All software tools presented were designed and developed by Tommaso Rossini.</span><span class="it">Metodologie Teoriche, Validazione Data-Driven e Soluzioni Software. Paper completo sullo sviluppo di strategie di trading: identificazione del trend, analisi dei regimi, esecuzione dei segnali, trading discrezionale vs algoritmico, e il framework dei quattro pilastri (Trend, Location, Signal, Filter). Tutti gli strumenti software presentati sono stati progettati e sviluppati da Tommaso Rossini.</span></div>
+          <div class="pact">
+            <a href="#" onclick="openPDF('Strategic_Trading.pdf','Strategic Trading in Financial Markets');return false;" class="pbtn pri"><span class="en">Read &rarr;</span><span class="it">Leggi &rarr;</span></a>
+            <a href="Strategic_Trading.pdf" download class="pbtn"><span class="en">Download</span><span class="it">Scarica</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub" data-pid="b2">
+        <button class="adel" onclick="delCard('b2','pub-cont')">&#10005; Remove</button>
+        <div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <div class="pb">
+          <div class="pty"><span class="en">Academic Paper &middot; PDF</span><span class="it">Paper Accademico &middot; PDF</span></div>
+          <div class="ptitle">Investment Strategies: Adaptive Asset Allocation</div>
+          <div class="pdes"><span class="en">Universit&agrave; di Milano-Bicocca, 2024&ndash;2025. Analysis of asset allocation strategies combining position sizing rules with risk-based approaches (EW, Momentum, Risk Parity, Min-Variance, Mean-Variance). Introduces a proprietary composite performance metric &mdash; the Omega Portfolio Rating. Co-authored with Francesco Melocchi and Gianluca De Pieri.</span><span class="it">Universit&agrave; di Milano-Bicocca, 2024&ndash;2025. Analisi di strategie di asset allocation che combinano regole di position sizing con approcci risk-based (EW, Momentum, Risk Parity, Min-Variance, Mean-Variance). Introduce una metrica composita proprietaria &mdash; l&rsquo;Omega Portfolio Rating. Co-autori: Francesco Melocchi e Gianluca De Pieri.</span></div>
+          <div class="pact">
+            <a href="#" onclick="openPDF('AAA_Eng.pdf','Investment Strategies: Adaptive Asset Allocation');return false;" class="pbtn pri"><span class="en">Read &rarr;</span><span class="it">Leggi &rarr;</span></a>
+            <a href="AAA_Eng.pdf" download class="pbtn"><span class="en">Download</span><span class="it">Scarica</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub" data-pid="b3">
+        <button class="adel" onclick="delCard('b3','pub-cont')">&#10005; Remove</button>
+        <div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <div class="pb">
+          <div class="pty"><span class="en">Research Report &middot; PDF</span><span class="it">Report di Ricerca &middot; PDF</span></div>
+          <div class="ptitle">Omega Trading System &mdash; Portfolio Outlook &amp; Analysis</div>
+          <div class="pdes"><span class="en">Multi-strategy futures portfolio analysis: 10 strategies across equity indices (NQ, ES, YM, RTY), commodities (CL, GC, HG), currencies (EUR, AUD), and bonds (US). Full statistical analysis including Monte Carlo simulation, correlation matrices across economic cycles, seasonal P&amp;L patterns, and risk-adjusted performance metrics (2018&ndash;2024).</span><span class="it">Analisi di portafoglio multi-strategia su 10 futures: indici (NQ, ES, YM, RTY), materie prime (CL, GC, HG), valute (EUR, AUD), bond (US). Analisi statistica completa: Monte Carlo, matrici di correlazione per ciclo economico, pattern stagionali della P&amp;L, metriche di performance risk-adjusted (2018&ndash;2024).</span></div>
+          <div class="pact">
+            <a href="#" onclick="openPDF('Portfolio_report.pdf','Omega Trading System — Portfolio Outlook &amp; Analysis');return false;" class="pbtn pri"><span class="en">Read &rarr;</span><span class="it">Leggi &rarr;</span></a>
+            <a href="Portfolio_report.pdf" download class="pbtn"><span class="en">Download</span><span class="it">Scarica</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub" data-pid="b4">
+        <button class="adel" onclick="delCard('b4','pub-cont')">&#10005; Remove</button>
+        <div class="pi"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></div>
+        <div class="pb">
+          <div class="pty"><span class="en">Financial Articles &middot; LinkedIn</span><span class="it">Articoli Finanziari &middot; LinkedIn</span></div>
+          <div class="ptitle"><span class="en">Financial Writing &mdash; Selected Articles</span><span class="it">Articoli Finanziari &mdash; Selezione</span></div>
+          <div class="pdes"><span class="en">A selection of financial articles published on Investire.biz and other platforms, covering market analysis, quantitative finance, and trading methodology. Full archive available on LinkedIn.</span><span class="it">Selezione di articoli finanziari pubblicati su Investire.biz e altre piattaforme, su analisi di mercato, finanza quantitativa e metodologia di trading. Archivio completo su LinkedIn.</span></div>
+          <div class="pact">
+            <a href="https://www.linkedin.com/in/tommaso-rossini-89a913233/?profileId=ACoAADpVhjYBvsF_Z6XsuNcpS6cvdbg-sbMgmKc" target="_blank" class="pbtn pri"><span class="en">View on LinkedIn &rarr;</span><span class="it">Vedi su LinkedIn &rarr;</span></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div><!-- /pf -->
+
+</main>
+
+<!-- PDF VIEWER MODAL -->
+<div class="pdfm" id="pdfm">
+  <div class="pdfh">
+    <span id="pdftitle"></span>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <a id="pdfdown" href="#" download class="pdfh button" style="color:#D8D7D3;font-size:.78rem;letter-spacing:.06em;border:1px solid #333;padding:6px 16px;text-decoration:none;transition:border-color .18s;">&#8595; Download</a>
+      <button class="pcl" onclick="closePDF()">&#10005;</button>
+    </div>
+  </div>
+  <iframe class="pdff" id="pdfframe" src="" title="PDF Viewer"></iframe>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="aov" id="aov">
+  <div class="abox">
+    <button class="acl" onclick="closeAdmin()">&#215;</button>
+    <h2><span class="en">Admin Panel</span><span class="it">Pannello Admin</span></h2>
+    <p class="asub"><span class="en">Make your changes, then click "Download Updated Site" to get the new index.html. Replace the file on GitHub and redeploy &mdash; all visitors will see the changes.</span><span class="it">Apporta le modifiche, poi clicca "Scarica sito aggiornato" per ottenere il nuovo index.html. Sostituisci il file su GitHub e rideploya &mdash; tutti i visitatori vedranno le modifiche.</span></p>
+
+    <div class="asec">
+      <h3><span class="en">&#8681; Download Updated Site</span><span class="it">&#8681; Scarica sito aggiornato</span></h3>
+      <p style="font-size:.8rem;color:var(--fg2);margin-bottom:14px;"><span class="en">This bakes all your current changes into a new index.html ready to deploy.</span><span class="it">Questo incorpora tutte le modifiche correnti in un nuovo index.html pronto al deploy.</span></p>
+      <div class="ar"><label></label><button class="abtn dl" onclick="exportSite()">&#8681; <span class="en">Download Updated Site</span><span class="it">Scarica sito aggiornato</span></button></div>
+    </div>
+
+    <div class="asec">
+      <h3><span class="en">Section Visibility</span><span class="it">Visibilit&agrave; Sezioni</span></h3>
+      <div id="sec-tog"></div>
+    </div>
+
+    <div class="asec">
+      <h3><span class="en">Add Active Project</span><span class="it">Aggiungi Progetto Attivo</span></h3>
+      <div class="ar"><label>Tag</label><input class="ai" id="np-tag" placeholder="e.g. Trading Software &middot; SaaS"></div>
+      <div class="ar"><label><span class="en">Title</span><span class="it">Titolo</span></label><input class="ai" id="np-title" placeholder="Project name"></div>
+      <div class="ar"><label><span class="en">Description</span><span class="it">Descrizione</span></label><input class="ai" id="np-desc" placeholder="Short description (EN)"></div>
+      <div class="ar"><label>Link (opt.)</label><input class="ai" id="np-link" placeholder="https://..."></div>
+      <div class="ar"><label></label><button class="abtn" onclick="addProject()"><span class="en">Add Project</span><span class="it">Aggiungi Progetto</span></button></div>
+    </div>
+
+    <div class="asec">
+      <h3><span class="en">Add Publication</span><span class="it">Aggiungi Pubblicazione</span></h3>
+      <div class="ar"><label><span class="en">Type label</span><span class="it">Etichetta</span></label><input class="ai" id="nb-type" placeholder="e.g. Research Paper &middot; PDF"></div>
+      <div class="ar"><label><span class="en">Title</span><span class="it">Titolo</span></label><input class="ai" id="nb-title" placeholder="Publication title"></div>
+      <div class="ar"><label><span class="en">Description</span><span class="it">Descrizione</span></label><input class="ai" id="nb-desc" placeholder="Short description"></div>
+      <div class="ar">
+        <label>Kind</label>
+        <select class="as" id="nb-kind">
+          <option value="pdf">PDF &mdash; same folder as index.html</option>
+          <option value="link">External link (LinkedIn, URL)</option>
+        </select>
+      </div>
+      <div class="ar"><label><span class="en">Filename/URL</span><span class="it">File/URL</span></label><input class="ai" id="nb-src" placeholder="myfile.pdf  or  https://..."></div>
+      <div class="ar"><label></label><button class="abtn" onclick="addPub()"><span class="en">Add Publication</span><span class="it">Aggiungi Pubblicazione</span></button></div>
+    </div>
+
+    <div class="asec">
+      <h3><span class="en">Text Editing</span><span class="it">Modifica Testi</span></h3>
+      <p style="font-size:.8rem;color:var(--fg2);margin-bottom:12px;"><span class="en">Click the pencil icon (bottom-right) to enter text edit mode. Click any gold-underlined text and type. Press Save when done, then Download Updated Site.</span><span class="it">Clicca l&rsquo;icona matita (in basso a destra) per modificare i testi. Clicca su qualsiasi testo sottolineato in oro e scrivi. Premi Salva, poi Scarica sito aggiornato.</span></p>
+    </div>
+
+    <div class="asec">
+      <h3><span class="en">Admin Password</span><span class="it">Password Admin</span></h3>
+      <div class="ar"><label><span class="en">New password</span><span class="it">Nuova password</span></label><input class="ai" id="new-pwd" type="password" placeholder="Min. 4 characters"></div>
+      <div class="ar"><label></label><button class="abtn" onclick="changePwd()"><span class="en">Update Password</span><span class="it">Aggiorna Password</span></button></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PASSWORD OVERLAY -->
+<div class="pov" id="pov">
+  <div class="pbox">
+    <h3><span class="en">Admin Access</span><span class="it">Accesso Admin</span></h3>
+    <p><span class="en">Enter your admin password to manage content.</span><span class="it">Inserisci la password admin per gestire i contenuti.</span></p>
+    <input class="pinp" id="pinp" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')checkPwd()">
+    <div class="perr" id="perr"><span class="en">Incorrect password.</span><span class="it">Password errata.</span></div>
+    <div style="display:flex;gap:10px;">
+      <button class="abtn" onclick="checkPwd()">OK</button>
+      <button class="abtn out" onclick="document.getElementById('pov').classList.remove('open')"><span class="en">Cancel</span><span class="it">Annulla</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT TOAST (admin only) -->
+<div class="etoas" id="etoas">
+  <span class="en">Click gold underlined text to edit</span><span class="it">Clicca il testo sottolineato per modificare</span>
+  <button class="tbtn" onclick="saveEdits()"><span class="en">Save</span><span class="it">Salva</span></button>
+  <button class="tbtn s" onclick="cancelEdit()">Cancel</button>
+</div>
+
+<!-- PENCIL FAB (admin only) -->
+<button class="fab pfab" id="pfab" onclick="toggleEdit()" title="Edit text">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#C8C7C3" stroke-width="1.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+</button>
+
+<!-- GEAR FAB -->
+<button class="fab gfab" id="gfab" onclick="gearClick()" title="Admin">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#C8C7C3" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+</button>
+
+<script>
+var SECS=[
+  {id:"exp",  lab:{en:"Experience",         it:"Esperienza"},    page:"cv"},
+  {id:"edu",  lab:{en:"Education",          it:"Istruzione"},    page:"cv"},
+  {id:"cert", lab:{en:"Certifications",     it:"Certificazioni"},page:"cv"},
+  {id:"langs",lab:{en:"Languages",          it:"Lingue"},        page:"cv"},
+  {id:"sk",   lab:{en:"Skills",             it:"Skills"},        page:"cv"},
+  {id:"proj", lab:{en:"Active Projects",    it:"Progetti Attivi"},page:"pf"},
+  {id:"pub",  lab:{en:"Publications",       it:"Pubblicazioni"}, page:"pf"},
+];
+var PICDF='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>';
+var PICLI='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>';
+
+// PAGE NAV
+function showPage(n){
+  document.querySelectorAll(".page").forEach(function(p){p.classList.remove("on");});
+  document.getElementById("page-"+n).classList.add("on");
+  document.querySelectorAll(".nl2[id^='nav-']").forEach(function(l){l.classList.remove("on");});
+  var nl=document.getElementById("nav-"+n);
+  if(nl)nl.classList.add("on");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function goTo(pg,id){
+  showPage(pg);
+  setTimeout(function(){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:"smooth",block:"start"});},60);
+}
+
+// LANGUAGE
+function setLang(l){
+  document.body.classList.remove("lang-en","lang-it");
+  document.body.classList.add("lang-"+l);
+  document.getElementById("ben").classList.toggle("on",l==="en");
+  document.getElementById("bit").classList.toggle("on",l==="it");
+  localStorage.setItem("tr-lang",l);
+}
+
+// SECTION VISIBILITY
+function loadSecVis(){
+  SECS.forEach(function(s){
+    var h=localStorage.getItem("tr-sec-"+s.id)==="1";
+    var el=document.querySelector("[data-sid='"+s.id+"']");
+    if(el)el.classList.toggle("hide",h);
+  });
+}
+function buildSecToggles(){
+  var c=document.getElementById("sec-tog");c.innerHTML="";
+  var lang=localStorage.getItem("tr-lang")||"en";
+  SECS.forEach(function(s){
+    var h=localStorage.getItem("tr-sec-"+s.id)==="1";
+    var row=document.createElement("div");row.className="stog";
+    var lbl=document.createElement("span");lbl.textContent=(s.lab[lang]||s.lab.en)+" — "+s.page;
+    var btn=document.createElement("button");btn.className="tsw"+(h?"":" on");
+    btn.onclick=function(){var on=btn.classList.contains("on");if(on){btn.classList.remove("on");localStorage.setItem("tr-sec-"+s.id,"1");}else{btn.classList.add("on");localStorage.removeItem("tr-sec-"+s.id);}loadSecVis();};
+    row.appendChild(lbl);row.appendChild(btn);c.appendChild(row);
+  });
+}
+
+// PDF VIEWER
+function openPDF(file,title){
+  document.getElementById("pdftitle").textContent=title||file;
+  document.getElementById("pdfframe").src=file;
+  document.getElementById("pdfdown").href=file;
+  document.getElementById("pdfdown").download=file;
+  document.getElementById("pdfm").classList.add("open");
+}
+function closePDF(){
+  document.getElementById("pdfm").classList.remove("open");
+  document.getElementById("pdfframe").src="";
+}
+
+// ADMIN PASSWORD
+var aon=false;
+function gearClick(){
+  if(aon){aon=false;document.body.classList.remove("aon");document.getElementById("gfab").classList.remove("on");closeAdmin();return;}
+  document.getElementById("pov").classList.add("open");
+  document.getElementById("pinp").value="";
+  document.getElementById("perr").style.display="none";
+  setTimeout(function(){document.getElementById("pinp").focus();},100);
+}
+function checkPwd(){
+  var v=document.getElementById("pinp").value;
+  var stored=localStorage.getItem("tr-pwd")||"omega2025";
+  if(v===stored){
+    document.getElementById("pov").classList.remove("open");
+    aon=true;
+    document.body.classList.add("aon");
+    document.getElementById("gfab").classList.add("on");
+    buildSecToggles();
+    document.getElementById("aov").classList.add("open");
+  } else {
+    document.getElementById("perr").style.display="block";
+  }
+}
+function closeAdmin(){document.getElementById("aov").classList.remove("open");}
+function changePwd(){
+  var v=document.getElementById("new-pwd").value;
+  if(!v||v.length<4){alert("Min 4 characters");return;}
+  localStorage.setItem("tr-pwd",v);
+  document.getElementById("new-pwd").value="";
+  alert("Password updated ✓");
+}
+
+// TEXT EDITING (admin only)
+var emode=false;
+var savedEdits={};
+function toggleEdit(){
+  if(!aon)return;
+  emode=!emode;
+  document.body.classList.toggle("emode",emode);
+  document.getElementById("etoas").classList.toggle("on",emode);
+  document.getElementById("pfab").style.background=emode?"var(--accent)":"";
+  document.querySelectorAll("[data-k]").forEach(function(el){el.contentEditable=emode?"true":"false";});
+}
+function saveEdits(){
+  document.querySelectorAll("[data-k]").forEach(function(el){savedEdits[el.dataset.k]=el.innerHTML;localStorage.setItem("tr-k-"+el.dataset.k,el.innerHTML);});
+  document.getElementById("etoas").style.background="green";
+  setTimeout(function(){document.getElementById("etoas").style.background="";toggleEdit();},900);
+}
+function cancelEdit(){
+  document.querySelectorAll("[data-k]").forEach(function(el){var s=localStorage.getItem("tr-k-"+el.dataset.k);if(s)el.innerHTML=s;});
+  emode=false;document.body.classList.remove("emode");document.getElementById("etoas").classList.remove("on");
+  document.querySelectorAll("[data-k]").forEach(function(el){el.contentEditable="false";});
+}
+function loadEdits(){
+  document.querySelectorAll("[data-k]").forEach(function(el){var s=localStorage.getItem("tr-k-"+el.dataset.k);if(s)el.innerHTML=s;});
+}
+
+// ADD/REMOVE CARDS
+function delCard(id,cid){
+  if(!aon)return;
+  var el=document.querySelector("[data-cid='"+id+"'],[data-pid='"+id+"']");
+  if(el){el.remove();var d=JSON.parse(localStorage.getItem("tr-del-"+cid)||"[]");d.push(id);localStorage.setItem("tr-del-"+cid,JSON.stringify(d));var a=JSON.parse(localStorage.getItem("tr-add-"+cid)||"[]");localStorage.setItem("tr-add-"+cid,JSON.stringify(a.filter(function(x){return x.id!==id;})));}
+}
+function addProject(){
+  if(!aon)return;
+  var tag=document.getElementById("np-tag").value.trim();
+  var title=document.getElementById("np-title").value.trim();
+  var desc=document.getElementById("np-desc").value.trim();
+  var link=document.getElementById("np-link").value.trim();
+  if(!title){alert("Title required");return;}
+  var id="p"+Date.now();
+  var d={id:id,tag:tag,title:title,desc:desc,link:link,kind:"project"};
+  renderProject(d,"proj-cont");
+  var arr=JSON.parse(localStorage.getItem("tr-add-proj-cont")||"[]");arr.push(d);localStorage.setItem("tr-add-proj-cont",JSON.stringify(arr));
+  ["np-tag","np-title","np-desc","np-link"].forEach(function(f){document.getElementById(f).value="";});
+}
+function renderProject(d,cid){
+  var html="<div class='pc' data-cid='"+d.id+"'>"
+    +"<button class='adel' onclick='delCard(\""+d.id+"\",\""+cid+"\")'>&#10005; Remove</button>"
+    +(d.tag?"<div class='ptag'>"+d.tag+"</div>":"")
+    +"<div class='pn'>"+d.title+"</div>"
+    +(d.desc?"<div class='pd'>"+d.desc+"</div>":"")
+    +(d.link?"<a href='"+d.link+"' target='_blank' class='pl'>View &rarr;</a>":"")
+    +"</div>";
+  document.getElementById(cid).insertAdjacentHTML("beforeend",html);
+}
+function addPub(){
+  if(!aon)return;
+  var type=document.getElementById("nb-type").value.trim();
+  var title=document.getElementById("nb-title").value.trim();
+  var desc=document.getElementById("nb-desc").value.trim();
+  var kind=document.getElementById("nb-kind").value;
+  var src=document.getElementById("nb-src").value.trim();
+  if(!title){alert("Title required");return;}
+  var id="b"+Date.now();
+  var d={id:id,type:type,title:title,desc:desc,kind:kind,src:src};
+  renderPub(d,"pub-cont");
+  var arr=JSON.parse(localStorage.getItem("tr-add-pub-cont")||"[]");arr.push(d);localStorage.setItem("tr-add-pub-cont",JSON.stringify(arr));
+  ["nb-type","nb-title","nb-desc","nb-src"].forEach(function(f){document.getElementById(f).value="";});
+}
+function renderPub(d,cid){
+  var acts="";
+  if(d.kind==="pdf"&&d.src){acts="<a href='#' onclick='openPDF(\""+d.src+"\",\""+d.title+"\")' class='pbtn pri'>Read &rarr;</a><a href='"+d.src+"' download class='pbtn'>Download</a>";}
+  else if(d.src){acts="<a href='"+d.src+"' target='_blank' class='pbtn pri'>View &rarr;</a>";}
+  var html="<div class='pub' data-pid='"+d.id+"'>"
+    +"<button class='adel' onclick='delCard(\""+d.id+"\",\""+cid+"\")'>&#10005; Remove</button>"
+    +"<div class='pi'>"+(d.kind==="pdf"?PICDF:PICLI)+"</div>"
+    +"<div class='pb'>"
+    +(d.type?"<div class='pty'>"+d.type+"</div>":"")
+    +"<div class='ptitle'>"+d.title+"</div>"
+    +(d.desc?"<div class='pdes'>"+d.desc+"</div>":"")
+    +(acts?"<div class='pact'>"+acts+"</div>":"")
+    +"</div></div>";
+  document.getElementById(cid).insertAdjacentHTML("beforeend",html);
+}
+function loadPersisted(){
+  ["proj-cont","pub-cont"].forEach(function(cid){
+    var del=JSON.parse(localStorage.getItem("tr-del-"+cid)||"[]");
+    del.forEach(function(id){var el=document.querySelector("[data-cid='"+id+"'],[data-pid='"+id+"']");if(el)el.remove();});
+    var add=JSON.parse(localStorage.getItem("tr-add-"+cid)||"[]");
+    add.forEach(function(d){if(cid==="proj-cont")renderProject(d,cid);else renderPub(d,cid);});
+  });
+}
+
+// EXPORT SITE
+function exportSite(){
+  var clone=document.documentElement.cloneNode(true);
+  // remove admin elements
+  ["aov","pov","pdfm","gfab","pfab","etoas"].forEach(function(id){var el=clone.querySelector("#"+id);if(el)el.remove();});
+  clone.querySelectorAll(".adel").forEach(function(el){el.remove();});
+  clone.querySelectorAll("[data-k]").forEach(function(el){el.removeAttribute("contenteditable");});
+  // remove body classes set by session
+  clone.querySelector("body").className="lang-"+(localStorage.getItem("tr-lang")||"en");
+  // bake section visibility
+  SECS.forEach(function(s){
+    var h=localStorage.getItem("tr-sec-"+s.id)==="1";
+    var el=clone.querySelector("[data-sid='"+s.id+"']");
+    if(el)el.classList.toggle("hide",h);
+  });
+  // bake text edits (already in DOM since loadEdits runs on init)
+  // bake added/deleted cards (already handled since loadPersisted runs on init)
+  var html="<!DOCTYPE html>\n"+clone.outerHTML;
+  var blob=new Blob([html],{type:"text/html"});
+  var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="index.html";a.click();
+}
+
+// INIT
+(function init(){
+  var lang=localStorage.getItem("tr-lang")||"en";
+  setLang(lang);
+  loadEdits();
+  loadSecVis();
+  loadPersisted();
+})();
+</script>
+</body>
+</html>
