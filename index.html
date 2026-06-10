@@ -90,6 +90,16 @@ body.emode [data-k]:focus{background:rgba(184,149,90,.07);}
 .pbtn{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fg);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px;transition:color .18s;}
 .pbtn:hover{color:var(--accent);}
 .pbtn.pri{color:var(--accent);}
+/* reference cards */
+.refs{display:flex;flex-direction:column;gap:14px;}
+.ref{background:var(--white);border:1px solid var(--border);padding:30px 36px;position:relative;}
+.ref-quote{font-size:.88rem;color:var(--fg);line-height:1.8;font-style:italic;margin-bottom:18px;}
+.ref-quote::before{content:"\201C";font-family:"Playfair Display",serif;font-size:1.4rem;color:var(--accent);margin-right:2px;}
+.ref-meta{display:flex;align-items:center;justify-content:space-between;gap:14px;border-top:1px solid var(--border);padding-top:16px;flex-wrap:wrap;}
+.ref-who{flex:1;min-width:180px;}
+.ref-name{font-family:"Playfair Display",serif;font-size:.98rem;font-weight:500;color:var(--fg);}
+.ref-role{font-size:.74rem;color:var(--fg2);line-height:1.4;margin-top:2px;}
+.ref-tag{font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);border:1px solid var(--border);padding:4px 11px;white-space:nowrap;}
 /* admin del btn */
 .adel{display:none;position:absolute;top:12px;right:12px;background:none;border:1px solid var(--border);color:var(--fg2);font-size:.68rem;letter-spacing:.06em;padding:4px 10px;cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .18s;}
 .adel:hover{border-color:var(--red);color:var(--red);}
@@ -176,6 +186,7 @@ iframe.pdff{flex:1;border:none;width:100%;background:#fff;}
       <button class="nl2" onclick="goTo('cv','s-sk')">Skills</button>
       <button class="nl2" onclick="goTo('pf','s-proj')"><span class="en">Projects</span><span class="it">Progetti</span></button>
       <button class="nl2" onclick="goTo('pf','s-pub')"><span class="en">Publications</span><span class="it">Pubblicazioni</span></button>
+      <button class="nl2" onclick="goTo('pf','s-ref')"><span class="en">References</span><span class="it">Referenze</span></button>
     </div>
   </nav>
   <div class="sb-bot">
@@ -229,7 +240,7 @@ iframe.pdff{flex:1;border:none;width:100%;background:#fff;}
         <div>
           <div class="tt"><span class="en">Founder &amp; Lead Developer</span><span class="it">Fondatore &amp; Lead Developer</span></div>
           <div class="to">OmegaTools</div>
-          <div class="tde"><span class="en" data-k="e1en">Founded and operate OmegaTools, a software house specialising in financial market analysis tools. Three activity tracks: publishing open-access TradingView indicators for the trading community, developing premium indicators for retail traders, and building bespoke quantitative systems on commission for institutional clients and corporations.</span><span class="it" data-k="e1it">Ho fondato e gestisco OmegaTools, una software house specializzata in strumenti per l&rsquo;analisi dei mercati finanziari. Tre fronti: indicatori TradingView open-access per la community, indicatori premium per retail trader, e sistemi quantitativi su commissione per clienti istituzionali e aziende.</span></div>
+          <div class="tde"><span class="en" data-k="e1en">Founded and operate OmegaTools, a software house specialising in financial market analysis tools. Three activity tracks: publishing open-access TradingView indicators for the trading community, developing premium indicators for retail traders, and building bespoke quantitative systems on commission for institutional clients and corporations. Clients include Investire.biz, Deepcharts (Fabio Valentini, Trading World Champion), and Goldenspoon (an alpha research &amp; development firm).</span><span class="it" data-k="e1it">Ho fondato e gestisco OmegaTools, una software house specializzata in strumenti per l&rsquo;analisi dei mercati finanziari. Tre fronti: indicatori TradingView open-access per la community, indicatori premium per retail trader, e sistemi quantitativi su commissione per clienti istituzionali e aziende. Tra i clienti: Investire.biz, Deepcharts (Fabio Valentini, Campione del Mondo di Trading) e Goldenspoon (azienda di ricerca e sviluppo di alpha).</span></div>
         </div>
       </div>
       <div class="ti" data-cid="e2">
@@ -347,8 +358,9 @@ iframe.pdff{flex:1;border:none;width:100%;background:#fff;}
         <button class="adel" onclick="delCard('p1','proj-cont')">&#10005; Remove</button>
         <div class="ptag">Quantitative Software &middot; SaaS &middot; Community</div>
         <div class="pn">OmegaTools</div>
-        <div class="pd"><span class="en" data-k="p1en">A proprietary software house specialising in financial market analysis tools for TradingView. Open-access scripts are freely published for the trading community; advanced tools are available as premium subscriptions or built on commission for institutional clients.</span><span class="it" data-k="p1it">Software house proprietaria specializzata in strumenti di analisi dei mercati finanziari per TradingView. Script open-access gratuiti per la community; strumenti avanzati disponibili come abbonamenti premium o sviluppati su commissione per clienti istituzionali.</span></div>
-        <a href="https://it.tradingview.com/u/OmegaTools/#published-scripts" target="_blank" class="pl"><span class="en">View on TradingView &rarr;</span><span class="it">Vedi su TradingView &rarr;</span></a>
+        <div class="pd"><span class="en" data-k="p1en">A proprietary software house specialising in financial market analysis tools for TradingView. Open-access scripts are freely published for the trading community; advanced tools are available as premium subscriptions or built on commission for institutional clients. Tommaso is one of TradingView&rsquo;s ~30 official Pine Coders and one of the select few authorised to sell directly on the platform. OmegaTools was also personally invited onto TrendSpider, where it is featured in the Quant Suite collection.</span><span class="it" data-k="p1it">Software house proprietaria specializzata in strumenti di analisi dei mercati finanziari per TradingView. Script open-access gratuiti per la community; strumenti avanzati disponibili come abbonamenti premium o sviluppati su commissione per clienti istituzionali. Tommaso &egrave; uno dei ~30 Pine Coder ufficiali di TradingView e uno dei pochi selezionati ad avere l&rsquo;onore di vendere direttamente sulla piattaforma. OmegaTools &egrave; stato inoltre invitato personalmente su TrendSpider, dove &egrave; presente nella collezione Quant Suite.</span></div>
+        <a href="https://www.tradingview.com/spaces/OmegaTools/" target="_blank" class="pl"><span class="en">TradingView Space &rarr;</span><span class="it">Spazio TradingView &rarr;</span></a>
+        <a href="https://trendspider.com/trading-tools-store/collection/quant-suite/" target="_blank" class="pl" style="margin-left:24px;"><span class="en">TrendSpider Store &rarr;</span><span class="it">Store TrendSpider &rarr;</span></a>
       </div>
 
       <div class="pc" data-cid="p2">
@@ -438,6 +450,61 @@ iframe.pdff{flex:1;border:none;width:100%;background:#fff;}
           <div class="pact">
             <a href="https://www.linkedin.com/in/tommaso-rossini-89a913233/?profileId=ACoAADpVhjYBvsF_Z6XsuNcpS6cvdbg-sbMgmKc" target="_blank" class="pbtn pri"><span class="en">View on LinkedIn &rarr;</span><span class="it">Vedi su LinkedIn &rarr;</span></a>
           </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="sec" id="s-ref" data-sid="ref">
+    <div class="slabel"><span class="en">References</span><span class="it">Referenze</span></div>
+    <div class="refs" id="ref-cont">
+
+      <div class="ref" data-cid="r1">
+        <button class="adel" onclick="delCard('r1','ref-cont')">&#10005; Remove</button>
+        <div class="ref-quote"><span class="en">I got to know Tommaso in an informal setting and, as we built rapport, we started working together on a first project that is still ongoing. From there, other ideas emerged and today we are carrying forward several activities together. I greatly appreciated his ability to listen, the fact that he can manage many things simultaneously and, even moving from one project to another, always maintains focus and respect for deadlines. I think it is enough to say that the collaboration did not stop at the first experience, but continued naturally across other initiatives.</span><span class="it">Ho conosciuto Tommaso in un contesto informale e, prendendo confidenza, abbiamo iniziato a lavorare insieme su un primo progetto, che &egrave; ancora in corso. Da l&igrave; sono nate altre idee e oggi stiamo portando avanti pi&ugrave; attivit&agrave; insieme. Ho apprezzato molto la sua capacit&agrave; di ascolto, il fatto che riesca a gestire pi&ugrave; cose contemporaneamente e che, anche passando da un progetto all&rsquo;altro, riesca a mantenere sempre attenzione e rispetto delle tempistiche. Secondo me &egrave; sufficiente dire che la collaborazione non si sia fermata alla prima esperienza, ma che sia andata avanti in modo naturale su altre iniziative.</span></div>
+        <div class="ref-meta">
+          <div class="ref-who">
+            <div class="ref-name">Daniele Cristaldi</div>
+            <div class="ref-role">MSc in Finance &middot; Macro-driven Asset Allocation</div>
+          </div>
+          <div class="ref-tag"><span class="en">Collaborator</span><span class="it">Collaboratore</span></div>
+        </div>
+      </div>
+
+      <div class="ref" data-cid="r2">
+        <button class="adel" onclick="delCard('r2','ref-cont')">&#10005; Remove</button>
+        <div class="ref-quote"><span class="en">A master in Technical Analysis, I have had the pleasure of collaborating with him and can attest to his deep market knowledge and strong analytical skills. He consistently demonstrates clarity, precision, and professionalism, making him a highly reliable expert in financial markets.</span><span class="it">A master in Technical Analysis, I have had the pleasure of collaborating with him and can attest to his deep market knowledge and strong analytical skills. He consistently demonstrates clarity, precision, and professionalism, making him a highly reliable expert in financial markets.</span></div>
+        <div class="ref-meta">
+          <div class="ref-who">
+            <div class="ref-name">Francesco De Simone</div>
+            <div class="ref-role">Finance &amp; Actuarial Graduate &middot; Statistics and Financial Math Tutor</div>
+          </div>
+          <div class="ref-tag"><span class="en">Collaborator</span><span class="it">Collaboratore</span></div>
+        </div>
+      </div>
+
+      <div class="ref" data-cid="r3">
+        <button class="adel" onclick="delCard('r3','ref-cont')">&#10005; Remove</button>
+        <div class="ref-quote"><span class="en">I had the pleasure of working with Tommaso Rossini on the development of custom indicators for TradingView and ProRealtime. His work was excellent and proved to be of fundamental importance for our operations at investire.biz. Tommaso demonstrated not only great technical programming skill, but also a deep understanding of the real needs of those who trade. Highly recommended to anyone looking for a fast, serious, and well-prepared professional.</span><span class="it">Ho avuto il piacere di collaborare con Tommaso Rossini per lo sviluppo di alcuni indicatori personalizzati su TradingView e ProRealtime. Il suo lavoro &egrave; stato eccellente e si &egrave; rivelato di fondamentale importanza per la nostra operativit&agrave; su investire.biz. Tommaso ha dimostrato non solo grande competenza tecnica nella programmazione, ma anche una profonda comprensione delle reali esigenze di chi fa trading. Consigliatissimo a chiunque cerchi un professionista rapido, serio e preparato.</span></div>
+        <div class="ref-meta">
+          <div class="ref-who">
+            <div class="ref-name">Vincenzo Penna</div>
+            <div class="ref-role">Financial Analyst &middot; Trader &middot; Content Creator &middot; Account Manager</div>
+          </div>
+          <div class="ref-tag"><span class="en">Client</span><span class="it">Cliente</span></div>
+        </div>
+      </div>
+
+      <div class="ref" data-cid="r4">
+        <button class="adel" onclick="delCard('r4','ref-cont')">&#10005; Remove</button>
+        <div class="ref-quote"><span class="en">Tommaso is a highly skilled and reliable programmer. I worked with him as a client and was genuinely impressed by his ability to turn specific trading ideas into professional, well-structured, and practical indicators. He quickly understood my needs, asked the right questions, and delivered custom solutions with precision and attention to detail. Beyond his technical competence, he is responsive, serious, and easy to work with. I would strongly recommend Tommaso to anyone looking for a talented developer for TradingView indicators or custom analytical tools.</span><span class="it">Tommaso is a highly skilled and reliable programmer. I worked with him as a client and was genuinely impressed by his ability to turn specific trading ideas into professional, well-structured, and practical indicators. He quickly understood my needs, asked the right questions, and delivered custom solutions with precision and attention to detail. Beyond his technical competence, he is responsive, serious, and easy to work with. I would strongly recommend Tommaso to anyone looking for a talented developer for TradingView indicators or custom analytical tools.</span></div>
+        <div class="ref-meta">
+          <div class="ref-who">
+            <div class="ref-name">Riccardo Zago</div>
+            <div class="ref-role">Trader &amp; Director at ELP Finance LTD</div>
+          </div>
+          <div class="ref-tag"><span class="en">Client</span><span class="it">Cliente</span></div>
         </div>
       </div>
 
@@ -556,6 +623,7 @@ var SECS=[
   {id:"sk",   lab:{en:"Skills",             it:"Skills"},        page:"cv"},
   {id:"proj", lab:{en:"Active Projects",    it:"Progetti Attivi"},page:"pf"},
   {id:"pub",  lab:{en:"Publications",       it:"Pubblicazioni"}, page:"pf"},
+  {id:"ref",  lab:{en:"References",         it:"Referenze"},     page:"pf"},
 ];
 var PICDF='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>';
 var PICLI='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>';
